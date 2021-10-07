@@ -1,0 +1,65 @@
+$nrcoloane: 4;
+$nrganduri: 4;
+@mixin tableta {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media screen and (max-width: 578px) {
+        @content;
+    }
+}
+
+#ganduri {
+    font-family: 'Handlee', cursive;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: auto;
+    margin-top: 5em;
+    padding: 6em;
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    border: 0.2em #333 dashed;
+    border-radius: 1.5em;
+    width: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    transition: font-size 1s;
+}
+
+.ganduri {
+    display: grid;
+    grid-template-columns: repeat($nrcoloane, 1fr);
+    grid-template-rows: #{$nrganduri/4};
+}
+
+@for $i from 1 through $nrganduri {
+    .gand#{$i} {
+        grid-area: 1 / $i / 2 / $i + 1;
+        border: 1px dotted black;
+    }
+}
+
+@include tableta {
+    .ganduri {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    [class^=gand] {
+        grid-area: auto;
+    }
+    #ganduri {
+        font-size: 18px;
+    }
+}
+
+@include mobile {
+    .ganduri {
+        grid-template-columns: 1fr;
+    }
+    #ganduri {
+        font-size: 16px;
+        transition: none;
+    }
+}

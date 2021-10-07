@@ -1,0 +1,445 @@
+<%- include('../Fragmente/header', {pagina: 'rase'})%>
+    <link rel="stylesheet" href="/Resurse/Css/rase.css">
+
+    <% function calculeazaData(d){
+    
+        const luni = ["Ianuarie","Februarie","Martie","Aprilie","Mai","Iunie","Iulie","August","Septembrie","Octombrie","Noiembrie","Decembrie"]
+        const zile = ["Duminica","Luni","Marti","Miercuri","Joi","Vineri","Sambata"]
+        var zi = zile[d.getDay()];
+        var ziua_numerica = d.getDate();
+        var luna = luni[d.getMonth()];
+        var anul = d.getFullYear();
+        
+        return ziua_numerica + " " + luna + " " + anul + " (" + zi + ")" ;
+        
+    } %>
+
+
+        <section>
+            <h2>Iti doresti si tu o pisica doar pentru tine? Pe aceasta pagina poti sa gasesti cele mai comune rase de pisici domestice.</h2>
+
+            <div id="filtre">
+                <h3>Cauta pisica ideala:</h3>
+
+                <h4>1.Cauta o pisica dupa rasa:</h4>
+                <div><input type="text" name="rasa" id="cautare_rasa" placeholder="numele rasei"></div>
+
+                <h4>2.Cauta o pisica dupa greutate:</h4>
+                <div>2kg<input type="range" name="greutate" id="cautare_greutate" min="2" max="8" step="0.5" value="2">8kg</div>
+
+                <h4>3.Cauta o pisica dupa cele mai comune culori:</h4>
+                <div>
+                    <input type="radio" name="culoare" id="cautare_culoare_negru">negru
+
+                </div>
+                <div>
+                    <input type="radio" name="culoare" id="cautare_culoare_alb">alb
+
+                </div>
+                <div>
+                    <input type="radio" name="culoare" id="cautare_culoare_calico">calico
+
+                </div>
+                <div>
+                    <input type="radio" name="culoare" id="cautare_culoare_nimic" checked>nimic
+
+                </div>
+
+                <h4>4.Prin bifarea acestei casute vei vedea toate pisicile neergetice</h4>
+                <div>
+                    <input type="checkbox" name="energetica" id="cautare_energetica">Doar pisici neenergetice
+                </div>
+
+                <h4>5.Cauta ceva din descrierea unei pisici:</h4>
+                <div>
+                    <textarea name="descriere" id="cautare_descriere" cols="30" rows="5" placeholder="cauta descriere"></textarea>
+                </div>
+
+                <h4>6.Cauta o pisica dupa lungimea blanitei:</h4>
+                <div>
+                    <select name="par" id="cautare_par">
+                    <option value="">nimic</option>
+                    <option value="lung">par lung</option>
+                    <option value="scurt">par scurt</option>
+
+                </select>
+                </div>
+
+                <h4>7.Cauta o pisica dupa talie*:</h4>
+                <aside>*la acest filtru se pot selecta mai multe optiuni (tineti apasat "ctrl" pentru a selecta multiplu) </aside> <br>
+                <div>
+                    <select name="talie" id="cautare_talie" multiple>
+                    <option value="mica">Talie mica</option>
+                    <option value="medie">Talie medie</option>
+                    <option value="mare">Talie mare</option>
+                </select>
+                </div>
+
+                <br>
+                <br>
+
+                <button id="filtrare">Filtreaza</button> <br>
+                <button id="sortASC">Ordoneaza ascendent dupa talie, greutate</button>
+                <button id="sortDESC">Ordoneaza descendent dupa talie, greutate</button><br>
+                <button id="calculare">Apasa pentru a afla greutatea medie a pisicilor afisate</button><br>
+                <button id="resetare">Reseteaza filtrele</button>
+
+            </div>
+
+            <script>
+                window.onload = function() {
+                    document.getElementById("filtrare").onclick = function() {
+                        //validare
+                        if (/[^a-zA-Z ]/.test(document.getElementById("cautare_rasa").value)) {
+                            alert("Rasa nu poate contine decat litere si spatii");
+                            return;
+                        }
+
+                        //filtrare
+                        let articole = document.getElementsByClassName("pisica");
+                        for (let articol of articole) {
+
+                            //presupun ca articolul e vizibil
+                            articol.hidden = false;
+
+                            //cautare rasa
+                            let rasa_pisica = articol.getElementsByClassName("rasa_pisica")[0].innerHTML.toLowerCase();
+                            if (!rasa_pisica.includes(document.getElementById("cautare_rasa").value.toLowerCase())) {
+                                articol.hidden = true;
+                            }
+
+                            //cautare culoare
+                            let culori = articol.querySelector("tr:nth-child(3) td:nth-child(2)").innerHTML.toLowerCase();
+                            let lista_culori = culori.split(",");
+                            for (let i = 0; i < lista_culori.length; i++) {
+                                lista_culori[i] = lista_culori[i].trim();
+                            }
+
+                            let c_alb = document.getElementById("cautare_culoare_alb").checked;
+
+                            if (c_alb && !lista_culori.includes("alb")) {
+                                articol.hidden = true;
+                            }
+
+                            let c_calico = document.getElementById("cautare_culoare_calico").checked;
+
+                            if (c_calico && !lista_culori.includes("calico")) {
+                                articol.hidden = true;
+                            }
+
+                            let c_negru = document.getElementById("cautare_culoare_negru").checked;
+
+                            if (c_negru && !lista_culori.includes("negru")) {
+                                articol.hidden = true;
+                            }
+
+                            //greutate
+
+                            let greutate = articol.querySelector("tr:nth-child(1) td:nth-child(2)").innerHTML;
+                            greutate = parseFloat(greutate);
+
+                            let cautare_greutate = document.getElementById("cautare_greutate").value;
+                            cautare_greutate = parseFloat(cautare_greutate);
+
+                            if (greutate < cautare_greutate) {
+                                articol.hidden = true;
+                            }
+
+                            //neenergetica
+
+                            let cautare_neenergetica = document.getElementById("cautare_energetica").checked;
+
+                            let energetica = articol.querySelector("tr:nth-child(5) td:nth-child(2)").innerHTML;
+                            energetica = energetica.trim();
+
+                            if (cautare_neenergetica && energetica == "Da") {
+                                articol.hidden = true;
+                            }
+
+                            //descriere
+                            let cautare_descriere = document.getElementById("cautare_descriere").value.toLowerCase();
+
+                            let descriere = articol.getElementsByClassName("descriere_pisica")[0].innerHTML.toLowerCase();
+
+                            if (!descriere.includes(cautare_descriere)) {
+                                articol.hidden = true;
+                            }
+
+                            //blanita
+                            let cautare_par = document.getElementById("cautare_par").value;
+
+                            let par = articol.querySelector("tr:nth-child(2) td:nth-child(2)").innerHTML;
+                            par = par.trim();
+
+                            if (cautare_par && par != cautare_par) {
+                                articol.hidden = true;
+                            }
+
+                            //talie
+
+                            let cautare_talie_mica = document.getElementById("cautare_talie").options[0].selected;
+                            let cautare_talie_medie = document.getElementById("cautare_talie").options[1].selected;
+                            let cautare_talie_mare = document.getElementById("cautare_talie").options[2].selected;
+
+                            let talie = articol.getElementsByClassName("talie_pisica")[0].innerHTML;
+                            talie = talie.trim().toLowerCase();
+
+                            if (cautare_talie_mica && !cautare_talie_medie && !cautare_talie_mare && !talie.includes("mica")) {
+                                articol.hidden = true;
+                            }
+                            if (!cautare_talie_mica && cautare_talie_medie && !cautare_talie_mare && !talie.includes("medie")) {
+                                articol.hidden = true;
+                            }
+                            if (!cautare_talie_mica && !cautare_talie_medie && cautare_talie_mare && !talie.includes("mare")) {
+                                articol.hidden = true;
+                            }
+
+                            if (cautare_talie_mica && cautare_talie_medie && !cautare_talie_mare && talie == "mare") {
+                                articol.hidden = true;
+                            }
+                            if (cautare_talie_mica && !cautare_talie_medie && cautare_talie_mare && talie == "medie") {
+                                articol.hidden = true;
+                            }
+                            if (!cautare_talie_mica && cautare_talie_medie && cautare_talie_mare && talie == "mica") {
+                                articol.hidden = true;
+                            }
+
+
+
+
+
+
+                        }
+                    }
+
+                    //ordonare ASC
+                    document.getElementById("sortASC").onclick = function() {
+                        let articole = document.getElementsByClassName("pisica");
+                        let articole_lista = [];
+                        for (let articol of articole) {
+                            articole_lista.push(articol);
+                        }
+
+                        articole_lista.sort(function(a, b) {
+                            //sunt in ordine corecta - -1
+                            //au aceeasi ordine - 0
+                            //sunt in ordine gresita - 1
+
+                            let a_talie = a.getElementsByClassName("talie_pisica")[0].innerHTML.trim();
+                            let b_talie = b.getElementsByClassName("talie_pisica")[0].innerHTML.trim();
+
+                            if (a_talie == b_talie) {
+
+                                let a_greutate = a.querySelector("tr:nth-child(1) td:nth-child(2)").innerHTML;
+                                a_greutate = parseFloat(a_greutate);
+                                let b_greutate = b.querySelector("tr:nth-child(1) td:nth-child(2)").innerHTML;
+                                b_greutate = parseFloat(b_greutate);
+
+                                if (a_greutate < b_greutate) {
+                                    return -1;
+                                }
+
+                                if (a_greutate > b_greutate) {
+                                    return 1;
+                                }
+
+                                return 0;
+                            }
+
+                            if (a_talie == "mica") {
+                                return -1;
+                            }
+
+                            if (a_talie == "mica-medie" && b_talie == "mica") {
+                                return 1;
+                            }
+
+                            if (a_talie == "medie-mare" && b_talie == "medie") {
+                                return 1;
+                            }
+
+                            if (a_talie == "medie" && b_talie == "medie-mare") {
+                                return -1;
+                            }
+
+                            return b_talie.localeCompare(a_talie);
+
+
+                        });
+
+                        for (let articol of articole_lista) {
+                            articol.parentNode.appendChild(articol);
+                        }
+
+                    }
+
+                    //ordonare DESC
+                    document.getElementById("sortDESC").onclick = function() {
+                        let articole = document.getElementsByClassName("pisica");
+                        let articole_lista = [];
+                        for (let articol of articole) {
+                            articole_lista.push(articol);
+                        }
+
+                        articole_lista.sort(function(b, a) {
+                            //sunt in ordine corecta - -1
+                            //au aceeasi ordine - 0
+                            //sunt in ordine gresita - 1
+
+                            let a_talie = a.getElementsByClassName("talie_pisica")[0].innerHTML.trim();
+                            let b_talie = b.getElementsByClassName("talie_pisica")[0].innerHTML.trim();
+
+                            if (a_talie == b_talie) {
+
+                                let a_greutate = a.querySelector("tr:nth-child(1) td:nth-child(2)").innerHTML;
+                                a_greutate = parseFloat(a_greutate);
+                                let b_greutate = b.querySelector("tr:nth-child(1) td:nth-child(2)").innerHTML;
+                                b_greutate = parseFloat(b_greutate);
+
+                                if (a_greutate < b_greutate) {
+                                    return -1;
+                                }
+
+                                if (a_greutate > b_greutate) {
+                                    return 1;
+                                }
+
+                                return 0;
+                            }
+
+                            if (a_talie == "mica") {
+                                return -1;
+                            }
+
+                            if (a_talie == "mica-medie" && b_talie == "mica") {
+                                return 1;
+                            }
+
+                            if (a_talie == "medie-mare" && b_talie == "medie") {
+                                return 1;
+                            }
+
+                            if (a_talie == "medie" && b_talie == "medie-mare") {
+                                return -1;
+                            }
+
+                            return b_talie.localeCompare(a_talie);
+
+
+                        });
+
+                        for (let articol of articole_lista) {
+                            articol.parentNode.appendChild(articol);
+                        }
+
+                    }
+
+                    //greutatea medie a pisicilor afisate
+                    document.getElementById("calculare").onclick = function() {
+                        let articole = document.getElementsByClassName("pisica");
+                        let greutate_totala = 0;
+                        let nr_pisici = 0;
+                        for (let articol of articole) {
+                            if (articol.hidden == true) {
+                                continue;
+                            }
+
+                            nr_pisici = nr_pisici + 1;
+
+                            let greutate_pisica = articol.querySelector("tr:nth-child(1) td:nth-child(2)").innerHTML;
+                            greutate_pisica = parseFloat(greutate_pisica);
+
+                            greutate_totala = greutate_totala + greutate_pisica;
+                        }
+
+                        let greutate_medie = greutate_totala / nr_pisici;
+
+                        alert("Greutatea medie a pisilor este: " + greutate_medie + " kg");
+                    }
+
+                    //resetare
+                    document.getElementById("resetare").onclick = function() {
+                        let articole = document.getElementsByClassName("pisica");
+                        for (let articol of articole) {
+                            articol.hidden = false;
+                        }
+
+                        document.getElementById("cautare_rasa").value = "";
+                        document.getElementById("cautare_greutate").value = "2";
+                        document.getElementById("cautare_culoare_nimic").checked = true;
+                        document.getElementById("cautare_energetica").checked = false;
+                        document.getElementById("cautare_descriere").value = "";
+                        document.getElementById("cautare_par").value = "";
+                        for (let optiune of document.getElementById("cautare_talie").options) {
+                            optiune.selected = false;
+                        }
+                    }
+
+                }
+            </script>
+
+
+
+            <% for (let rasa of rase){ %>
+                <article class="pisica <%=rasa.talie%>" id="<%=" elem_ "+rasa.id%>">
+                    <h3>Rasa:
+                        <span class="rasa_pisica"><%= rasa.rase_pisici %></span>
+                    </h3>
+                    <div class="impreuna">
+                        <table>
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Greutate Medie (kg)</td>
+                                    <td>
+                                        <%=rasa.greutate_medie %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tip de par</td>
+                                    <td>
+                                        <%= rasa.par %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Culori</td>
+                                    <td>
+                                        <%= rasa.culoare %>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Adaugat la</td>
+                                    <td>
+                                        <time><%= calculeazaData(rasa.adaugat_la) %></time>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Rasa energetica</td>
+                                    <td>
+                                        <%= rasa.energetica ? "Da" : "Nu" %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                        <div><a href="/rase/<%= rasa.id %>"><img src="<%= rasa.imagine %>"></a></div>
+                    </div>
+                    <p>Descriere:
+                        <span class="descriere_pisica"><%= rasa.descriere %></span>
+                    </p>
+
+                    <p>Talie:
+                        <span class="talie_pisica"><%=rasa.talie%></span>
+                    </p>
+
+
+
+                </article>
+                <% } %>
+
+        </section>
+
+        <%- include('../Fragmente/footer') %>

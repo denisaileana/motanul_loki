@@ -1,0 +1,170 @@
+:root {
+    --bg_body_light: #d2bcb8;
+    --bg_footer_light: #968c83;
+    --footer_font_color_light: #333333;
+    --bg_section_light: rgba(0, 0, 0, 0.3);
+    --section_border_light: #333333;
+    --bg_body_dark: #363636;
+    --bg_footer_dark: #222021;
+    --footer_font_color_dark: #787276;
+    --bg_section_dark: #48494B;
+    --section_border_dark: #818380;
+}
+
+html {
+    min-height: 100vh;
+}
+
+section {
+    font-family: 'Handlee', cursive;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 75px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+    border-radius: 20px;
+    width: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Amatic SC', cursive;
+    /*pentru footer ca sa stea stuck to bottom*/
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+}
+
+body.light {
+    background-color: var(--bg_body_light);
+    --imagine: url(../Imagini/luna.png)
+}
+
+body.dark {
+    background-color: var(--bg_body_dark);
+    --imagine: url(../Imagini/soare.png)
+}
+
+#theme {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    border: 0;
+    outline: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+body.light #theme {
+    background: url(../Imagini/luna.png);
+    background-size: contain;
+}
+
+body.dark #theme {
+    background: url(../Imagini/soare.png);
+    background-size: contain;
+}
+
+body.light section {
+    background-color: var(--bg_section_light);
+    border: 3px dashed var(--section_border_light);
+}
+
+body.dark section {
+    background-color: var(--bg_section_dark);
+    border: 3px dashed var(--section_border_dark);
+}
+
+body.light footer {
+    background: var(--bg_footer_light);
+    color: var(--footer_font_color_light);
+}
+
+body.dark footer {
+    background: var(--bg_footer_dark);
+    color: var(--footer_font_color_dark);
+}
+
+h1 {
+    text-align: center;
+    font-size: 3.5em;
+}
+
+footer {
+    margin-top: 3px;
+    text-align: center;
+    font-size: 1.2em;
+    font-family: 'Handlee', cursive;
+    position: relative;
+}
+
+footer a {
+    color: inherit;
+}
+
+.scrolltotop {
+    position: absolute;
+    bottom: 50px;
+    right: 10px;
+}
+
+.scrolltotop img {
+    width: 30px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+@media print {
+    #banner {
+        top: 0px;
+        position: static !important;
+        animation: none !important;
+        transform: none !important;
+        background-color: white !important;
+    }
+    body {
+        background-color: white;
+    }
+    nav,
+    .scrolltotop,
+    section:nth-of-type(3),
+    .spatiere,
+    aside:nth-of-type(2),
+    .text-center,
+    section:first-of-type br:nth-of-type(-n+3),
+    section:nth-of-type(2) br:nth-of-type(-n+2) {
+        display: none;
+    }
+    table tfoot,
+    table thead {
+        display: table-row-group;
+    }
+    tr,
+    th,
+    td {
+        background-color: white !important;
+        border: 1px solid black !important
+    }
+    section {
+        margin: 0;
+        padding: 40px;
+        border: none;
+        border-radius: 0%;
+        background-color: white;
+    }
+    section:first-of-type img {
+        max-width: 300px;
+    }
+    section:first-of-type {
+        margin-top: 0;
+    }
+    footer {
+        background-color: white;
+    }
+}

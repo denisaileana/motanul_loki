@@ -1,0 +1,63 @@
+.pisica {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgba(67, 47, 33, 0.5);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pisica img {
+  width: 100%;
+}
+
+table {
+  border: 1px solid #363636;
+}
+
+table th,
+table td {
+  border: 1px solid #363636;
+}
+
+.impreuna {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.impreuna table {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0;
+}
+
+.impreuna img {
+  max-width: 480px;
+}
+
+section {
+  max-width: 1040px;
+}
+
+p {
+  text-align: left;
+  text-indent: 10px;
+}
+
+#filtre {
+  background-color: rgba(67, 47, 33, 0.5);
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+#filtre aside {
+  font-size: large;
+  color: black;
+  opacity: 0.9;
+}
+
+#filtre button {
+  font-family: 'Handlee', cursive;
+  font-size: 0.7em;
+}
+/*# sourceMappingURL=rase.css.map */

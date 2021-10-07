@@ -1,0 +1,10 @@
+video::cue {
+    color: black;
+    background-color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+video::cue(i) {
+    font-style: italic;
+}

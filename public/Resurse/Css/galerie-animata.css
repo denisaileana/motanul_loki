@@ -1,0 +1,203 @@
+#notificare {
+  display: none;
+}
+
+.galerie-animata {
+  display: block;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  border: 10px solid transparent;
+  -o-border-image: url(../Imagini/planta.jpg) 20%;
+     border-image: url(../Imagini/planta.jpg) 20%;
+  margin: 0 auto;
+}
+
+.sectiune-galerie {
+  overflow: auto;
+}
+
+.galerie-animata figcaption {
+  position: absolute;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  text-align: center;
+}
+
+.galerie-animata figure {
+  width: 300px;
+  height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  position: absolute;
+  -webkit-animation-name: galerie-animatie;
+          animation-name: galerie-animatie;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 22s;
+          animation-duration: 22s;
+  -webkit-transform-origin: 0 50%;
+          transform-origin: 0 50%;
+  margin: 0;
+}
+
+.galerie-animata:hover figure {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
+.galerie-animata figure img {
+  width: 100%;
+}
+
+@-webkit-keyframes galerie-animatie {
+  0% {
+    opacity: 1;
+    z-index: 10;
+  }
+  4.54545% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+  }
+  6.81818% {
+    -webkit-transform: scaleY(0.2) rotateZ(0);
+            transform: scaleY(0.2) rotateZ(0);
+  }
+  9.09091% {
+    opacity: 1;
+    z-index: 10;
+    -webkit-transform: scaleY(0.2) rotateZ(180deg);
+            transform: scaleY(0.2) rotateZ(180deg);
+  }
+  9.09092% {
+    opacity: 0;
+    z-index: -10;
+    -webkit-transform: scaleY(1) rotateZ(0);
+            transform: scaleY(1) rotateZ(0);
+  }
+  90.90909% {
+    opacity: 0;
+    z-index: -10;
+  }
+  90.9091% {
+    opacity: 0;
+    z-index: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes galerie-animatie {
+  0% {
+    opacity: 1;
+    z-index: 10;
+  }
+  4.54545% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+  }
+  6.81818% {
+    -webkit-transform: scaleY(0.2) rotateZ(0);
+            transform: scaleY(0.2) rotateZ(0);
+  }
+  9.09091% {
+    opacity: 1;
+    z-index: 10;
+    -webkit-transform: scaleY(0.2) rotateZ(180deg);
+            transform: scaleY(0.2) rotateZ(180deg);
+  }
+  9.09092% {
+    opacity: 0;
+    z-index: -10;
+    -webkit-transform: scaleY(1) rotateZ(0);
+            transform: scaleY(1) rotateZ(0);
+  }
+  90.90909% {
+    opacity: 0;
+    z-index: -10;
+  }
+  90.9091% {
+    opacity: 0;
+    z-index: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.galerie-animata figure:nth-of-type(11) {
+  -webkit-animation-delay: -22s;
+          animation-delay: -22s;
+}
+
+.galerie-animata figure:nth-of-type(10) {
+  -webkit-animation-delay: -20s;
+          animation-delay: -20s;
+}
+
+.galerie-animata figure:nth-of-type(9) {
+  -webkit-animation-delay: -18s;
+          animation-delay: -18s;
+}
+
+.galerie-animata figure:nth-of-type(8) {
+  -webkit-animation-delay: -16s;
+          animation-delay: -16s;
+}
+
+.galerie-animata figure:nth-of-type(7) {
+  -webkit-animation-delay: -14s;
+          animation-delay: -14s;
+}
+
+.galerie-animata figure:nth-of-type(6) {
+  -webkit-animation-delay: -12s;
+          animation-delay: -12s;
+}
+
+.galerie-animata figure:nth-of-type(5) {
+  -webkit-animation-delay: -10s;
+          animation-delay: -10s;
+}
+
+.galerie-animata figure:nth-of-type(4) {
+  -webkit-animation-delay: -8s;
+          animation-delay: -8s;
+}
+
+.galerie-animata figure:nth-of-type(3) {
+  -webkit-animation-delay: -6s;
+          animation-delay: -6s;
+}
+
+.galerie-animata figure:nth-of-type(2) {
+  -webkit-animation-delay: -4s;
+          animation-delay: -4s;
+}
+
+.galerie-animata figure:nth-of-type(1) {
+  -webkit-animation-delay: -2s;
+          animation-delay: -2s;
+}
+
+@media screen and (max-width: 578px) {
+  .galerie-animata {
+    display: none;
+  }
+  #notificare {
+    display: block;
+  }
+}
+/*# sourceMappingURL=galerie-animata.css.map */

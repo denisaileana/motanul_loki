@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EAIF,MAAM,EAAE,eAAe;EACvB,MAAM,EAAE,IAAI;CACf;;AAND,AACI,KADC,CACD,EAAE,CAAC;EACC,MAAM,EAAE,eAAe;CAC1B",
+    "sources": [
+        "utilizatori.scss"
+    ],
+    "names": [],
+    "file": "utilizatori.css"
+}

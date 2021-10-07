@@ -1,0 +1,21 @@
+<!--final pagina-->
+
+<footer class="light">
+    <div class="scrolltotop">
+        <a href="#top"><img src="/Resurse/Imagini/arrow.png" alt=""></a>
+    </div>
+    Poti solicita detalii despre mine la: <br> email: <a href="mailto:denisa.neacsu@s.unibuc.ro">denisa.neacsu@s.unibuc.ro</a> <br> Vrei sa imi trimiti soricei? Ma gasesti la adresa: <address>Strada Piscesti 1, Orasul Felinelor</address>
+</footer>
+<script>
+    document.getElementsByClassName("scrolltotop")[0].onclick = function(e) {
+        e.preventDefault();
+        document.querySelector('#top').scrollIntoView({
+            behavior: 'smooth'
+        });
+
+    }
+</script>
+
+</body>
+
+</html>

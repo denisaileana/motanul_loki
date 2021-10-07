@@ -1,0 +1,78 @@
+<%- include('../Fragmente/header', {pagina: 'rase'}) %>
+    <link rel="stylesheet" href="/Resurse/Css/rase.css">
+    <section>
+        <h2>Rase de pisici</h2>
+
+
+        <% function calculeazaData(d){
+    
+            const luni = ["Ianuarie","Februarie","Martie","Aprilie","Mai","Iunie","Iulie","August","Septembrie","Octombrie","Noiembrie","Decembrie"]
+            const zile = ["Duminica","Luni","Marti","Miercuri","Joi","Vineri","Sambata"]
+            var zi = zile[d.getDay()];
+            var ziua_numerica = d.getDate();
+            var luna = luni[d.getMonth()];
+            var anul = d.getFullYear();
+            
+            return ziua_numerica + " " + luna + " " + anul + " (" + zi + ")" ;
+            
+        } %>
+
+            <article class="pisica <%=rasa.talie%>" id="<%=" elem_ "+rasa.id%>">
+                <h3>Rasa:
+                    <%= rasa.rase_pisici %>
+                </h3>
+                <div class="impreuna">
+                    <table>
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Greutate Medie (kg)</td>
+                                <td>
+                                    <%= rasa.greutate_medie %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tip de par</td>
+                                <td>
+                                    <%= rasa.par %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Culori</td>
+                                <td>
+                                    <%= rasa.culoare %>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Adaugat la</td>
+                                <td>
+                                    <time><%= calculeazaData(rasa.adaugat_la) %></time>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Rasa energetica</td>
+                                <td>
+                                    <%= rasa.energetica ? "Da" : "Nu" %>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                    <div><a href="/rase/<%= rasa.id %>"><img src="<%= rasa.imagine %>"></a></div>
+                </div>
+                <p>Descriere:
+                    <%= rasa.descriere %>
+                </p>
+                <p>Talie:
+                    <%=rasa.talie%>
+                </p>
+            </article>
+            <div>
+                <a style=" color:black; font-family: 'Amatic SC', cursive;" href="/rase">Inapoi la toate rasele</a>
+            </div>
+    </section>
+
+    <%- include('../Fragmente/footer') %>

@@ -1,0 +1,77 @@
+#ganduri {
+  font-family: 'Handlee', cursive;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: auto;
+  margin-top: 5em;
+  padding: 6em;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  border: 0.2em #333 dashed;
+  border-radius: 1.5em;
+  width: 100%;
+  overflow: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transition: font-size 1s;
+  transition: font-size 1s;
+}
+
+.ganduri {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  -ms-grid-rows: 1;
+      grid-template-rows: 1;
+}
+
+.gand1 {
+  -ms-grid-row: 1;
+  grid-area: 1.5;
+  border: 1px dotted black;
+}
+
+.gand2 {
+  -ms-grid-row: 1;
+  grid-area: 1.125;
+  border: 1px dotted black;
+}
+
+.gand3 {
+  -ms-grid-row: 1;
+  grid-area: 1.05556;
+  border: 1px dotted black;
+}
+
+.gand4 {
+  -ms-grid-row: 1;
+  grid-area: 1.03125;
+  border: 1px dotted black;
+}
+
+@media screen and (max-width: 768px) {
+  .ganduri {
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+  }
+  [class^=gand] {
+    grid-area: auto;
+  }
+  #ganduri {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 578px) {
+  .ganduri {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+  #ganduri {
+    font-size: 16px;
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+/*# sourceMappingURL=ganduri.css.map */

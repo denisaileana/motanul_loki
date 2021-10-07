@@ -1,0 +1,201 @@
+<!--tag-uri semantice: 
+  <a href=""></a> #ne duce catre o alta locatie, la care fara el nu avem acces
+  <time datetime=""></time> #pentru accesibilitate
+  <strong> #atentionare
+  <i> #termen stiintific-->
+
+
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Denisa-Ileana Neacsu">
+    <meta name="description" content="Fan-Blog motanul Loki">
+    <meta name="keywords" content="pisici, pisica, motan, felina, animal">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- pt device-uri mobile -->
+
+    <title>Loki Motanul</title>
+
+    <!--link pentru font-->
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet"
+          type="text/css">
+
+    <!--link pentru fontul din sections-->
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet" type="text/css">
+
+    <!--link pt iconuri-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css">
+
+    <!--favicon-->
+    <link rel="shortcut icon" type="image/x-icon" href="/Resurse/Imagini/favicon.ico"/>
+
+    <!--introducere css-->
+    <link rel="stylesheet" href="/Resurse/Css/principal.css" type="text/css">
+    <link rel="stylesheet" href="/Resurse/Css/nav.css" type="text/css">
+    <link rel="stylesheet" href="/Resurse/Css/banner.css" type="text/css">
+
+    <style>
+        picture {
+            width: 200px;
+            filter: grayscale(100%);
+        }
+
+        video {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+
+
+<body class="light">
+<a id="top"></a>
+<aside id="banner">Acest website este un proiect scolar!</aside>
+
+
+<script>
+    //functia schimbare tema
+    function f() {
+
+        if (document.body.className == "light") {
+            document.body.className = "dark";
+            localStorage.setItem("tema", "dark");
+        } else {
+            document.body.className = "light";
+            localStorage.setItem("tema", "light");
+        }
+    }
+
+    //retin in localstorage tema
+    let tema = "light";
+    if (localStorage.getItem("tema")) {
+        tema = localStorage.getItem("tema");
+    }
+    document.body.className = tema;
+</script>
+
+
+<header id="header">
+
+    <nav class="navigare">
+        <label for="hamburgermenu"><i class="fa fa-bars"></i></label><input type="checkbox" id="hamburgermenu">
+        <ul class="listap">
+            <li class="elemp<%= locals.pagina === 'acasa' ? ' activa' : '' %>">
+                <a class="textp" href="/">
+                    <i class="fa fa-home"></i> <span class="hidden-tablet">Acasa</span>
+                </a>
+            </li>
+            <li class="elemp">
+                <div class="textp">Index Loki Motanul</div>
+                <ul class="listas">
+                    <li class="elems2"><a class="texts" href="/#despre">Despre Loki</a></li>
+                    <li class="elems2"><a class="texts" href="/#tabel">Programul lui Loki</a></li>
+                    <li class="elems2"><a class="texts" href="/#video">Video</a></li>
+
+                </ul>
+            </li>
+            <li class="elemp<%= locals.pagina === 'galerii' ? ' activa' : '' %>">
+                <div class="textp">Galerii</div>
+                <ul class="listas">
+                    <li class="elems1"><a class="texts" href="/galerie">Statica</a></li>
+                    <li class="elems1"><a class="texts" href="/galerie-animata">Animata</a></li>
+                </ul>
+            </li>
+
+            <li class="elemp<%= locals.pagina === 'ganduri' ? ' activa' : '' %>"><a class="textp" href="/ganduri">Ganduri</a>
+            </li>
+
+            <li class="elemp<%= locals.pagina === 'rase' ? ' activa' : '' %>"><a class="textp" href="/rase">Rase de
+                    pisici</a></li>
+
+            <%
+            if (locals.utilizator) {
+            %>
+                <li class="elemp<%= locals.pagina === 'utilizatori' ? ' activa' : '' %>">
+                <div class="textp">
+                    Salut, <%= locals.utilizator.username %>
+                    <img class="avatar" src="<%= locals.utilizator.imagine_profil || '/Resurse/Imagini/avatar.svg' %>">
+                </div>
+                <ul class="listas">
+
+                    <%
+                        //daca e admin, sa apara /utilizatori in bara de nav
+                    if (locals.utilizator.rol == "admin"){
+                    %>
+                        <li class="elems1"><a class="texts" href="/utilizatori">Utilizatori</a></li>
+                    <%
+                    } %>
+                    <!--delogare-->
+                    <li class="elems1"><a class="texts" href="/logout">Logout</a></li>
+                </ul>
+            </li>
+            <%
+            }else{
+            %>
+                <li class="elemp<%= locals.pagina === 'login' ? ' activa' : '' %>">
+                    <div class="textp">
+                        Login
+                    </div>
+                    <!-- login form + buton inregistrare -->
+                    <form method="POST" action="/login">
+                        <ul class="listas">
+                            <li class="elems1"><input name="username" class="texts" placeholder="username" required>
+                            </li>
+                            <li class="elems1"><input name="parola" type="password" class="texts" placeholder="parola"
+                                                      required></li>
+                            <li class="elems1"><input type="submit" class="texts"></li>
+                            <li class="elems1"><a class="texts" href="/inregistrare">Inregistrare</a></li>
+                        </ul>
+                    </form>
+                </li>
+            <%
+            }
+            %>
+        </ul>
+    </nav>
+
+    <div class="spatiere" style="padding: 25px;"></div>
+    <div>
+        <button id="theme" onclick="f()"></button>
+    </div>
+
+    <h1>Motanul Loki</h1>
+
+
+</header>
+<script>
+    document.getElementById("header").onmouseleave = function () {
+        const meniu = document.getElementById("hamburgermenu");
+        if (meniu.checked) {
+            meniu.checked = false;
+        }
+    }
+
+    //scroll
+
+    document.getElementsByClassName("elems2")[0].onclick = function (e) {
+        e.preventDefault();
+        document.querySelector('#despre').scrollIntoView({
+            behavior: 'smooth'
+        });
+
+    }
+    document.getElementsByClassName("elems2")[1].onclick = function (e) {
+        e.preventDefault();
+        document.querySelector('#tabel').scrollIntoView({
+            behavior: 'smooth'
+        });
+
+    }
+    document.getElementsByClassName("elems2")[2].onclick = function (e) {
+        e.preventDefault();
+        document.querySelector('#video').scrollIntoView({
+            behavior: 'smooth'
+        });
+
+    }
+</script>

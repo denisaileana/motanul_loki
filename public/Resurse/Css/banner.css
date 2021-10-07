@@ -1,0 +1,42 @@
+#banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2em;
+    animation: 7s linear 1 banner;
+    background-color: red;
+    border: 1px solid yellow;
+    text-align: center;
+    transform: translateX(100%);
+    font-weight: bold;
+    line-height: 2em;
+    font-size: 1.5em;
+    text-shadow: 1px 1px 2px black;
+    z-index: 100;
+}
+
+@keyframes banner {
+    0% {
+        transform: translateX(-100%);
+    }
+    14.28% {
+        transform: translateX(0%);
+    }
+    33% {
+        background-color: red;
+        border-color: yellow;
+    }
+    66% {
+        background-color: yellow;
+        border-color: red;
+    }
+    85.71% {
+        transform: translateX(0%);
+    }
+    100% {
+        background-color: red;
+        border-color: yellow;
+        transform: translateX(100%);
+    }
+}

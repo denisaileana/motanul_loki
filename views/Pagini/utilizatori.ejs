@@ -1,0 +1,34 @@
+<%- include('../Fragmente/header', {pagina: 'utilizatori'}) %>
+    <link rel="stylesheet" href="/Resurse/Css/utilizatori.css">
+    <section>
+        <table>
+            <thead>
+                <tr>
+                    <td>Username</td>
+                    <td>Nume</td>
+                    <td>Rol</td>
+                    <td>Optiuni</td>
+                </tr>
+            </thead>
+            <tbody>
+            <%
+            for (const utilizator of rezultate){
+                %>
+                <tr>
+                    <td><%=utilizator.username%></td>
+                    <td><%=utilizator.nume + " " + utilizator.prenume[0]%></td>
+                    <td><%=utilizator.rol%></td>
+                    <td>
+                        <form method="POST" action="/utilizatori">
+                            <input type="hidden" name="id_utilizator" value="<%=utilizator.id%>">
+                            <button>promovează/retrogradează</button>
+                        </form>
+                    </td>
+                </tr>
+            <%
+            }
+    %>
+            </tbody>
+        </table>
+    </section>
+    <%- include('../Fragmente/footer') %>

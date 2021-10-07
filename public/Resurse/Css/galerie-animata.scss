@@ -1,0 +1,109 @@
+$nrimagini: 11;
+$durata_imagine: 2;
+$durata_totala: $nrimagini * $durata_imagine;
+$procentaj_x: 100 * $durata_imagine / $durata_totala;
+$procentaj_y: 100 - $procentaj_x;
+@mixin mobile {
+    @media screen and (max-width: 578px) {
+        @content;
+    }
+}
+
+#notificare {
+    display: none;
+}
+
+.galerie-animata {
+    display: block;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border: 10px solid transparent;
+    border-image: url(../Imagini/planta.jpg) 20%;
+    margin: 0 auto;
+}
+
+.sectiune-galerie {
+    overflow: auto;
+}
+
+.galerie-animata figcaption {
+    position: absolute;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    text-align: center;
+}
+
+.galerie-animata figure {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    position: absolute;
+    animation-name: galerie-animatie;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: #{$durata_totala}s;
+    transform-origin: 0 50%;
+    margin: 0;
+}
+
+.galerie-animata:hover figure {
+    animation-play-state: paused;
+}
+
+.galerie-animata figure img {
+    width: 100%;
+}
+
+@keyframes galerie-animatie {
+    0% {
+        opacity: 1;
+        z-index: 10;
+    }
+    #{$procentaj_x/2}% {
+        transform: scaleY(1);
+    }
+    #{$procentaj_x*3/4}% {
+        transform: scaleY(0.2) rotateZ(0);
+    }
+    #{$procentaj_x}% {
+        opacity: 1;
+        z-index: 10;
+        transform: scaleY(0.2) rotateZ(180deg);
+    }
+    #{$procentaj_x+0.00001}% {
+        opacity: 0;
+        z-index: -10;
+        transform: scaleY(1) rotateZ(0);
+    }
+    #{$procentaj_y}% {
+        opacity: 0;
+        z-index: -10;
+    }
+    #{$procentaj_y+0.00001}% {
+        opacity: 0;
+        z-index: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@for $i from 1 through $nrimagini {
+    .galerie-animata figure:nth-of-type(#{$nrimagini - $i + 1}) {
+        animation-delay: #{($i - 1) * $durata_imagine - $durata_totala}s;
+    }
+}
+
+@include mobile {
+    .galerie-animata {
+        display: none;
+    }
+    #notificare {
+        display: block;
+    }
+}

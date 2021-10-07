@@ -1,0 +1,42 @@
+<%- include('../Fragmente/header', {pagina: 'login'}) %>
+
+
+<% //daca e logat
+if (locals.utilizator){
+%>
+    <section>Te-ai logat cu succes!</section>
+<%
+}else{
+%>
+
+    <section>
+        <h2>Logare</h2>
+
+        <% //verificam daca a aparut o eroare
+        if (locals.eroare == true){
+        %>
+            <strong style="color: red">Date incorecte!</strong>
+        <%
+        }
+        %>
+
+        <form method="POST" action="/login">
+
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br>
+
+            <label for="parola">Parola:</label><br>
+            <input type="password" id="parola" name="parola" required><br>
+
+            <br><br>
+
+            <input type="submit" value="Logheaza-te!">
+
+
+        </form>
+    </section>
+<%
+}
+%>
+
+<%- include('../Fragmente/footer') %>

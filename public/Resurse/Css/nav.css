@@ -1,0 +1,120 @@
+.avatar {
+  height: auto;
+  width: 30px; }
+
+.navigare {
+  background-color: black;
+  opacity: 0.9;
+  position: fixed;
+  width: 100%;
+  z-index: 100; }
+
+.listap {
+  text-decoration: none;
+  text-align: center;
+  margin: 0;
+  padding: 0; }
+  @media screen and (max-width: 578px) {
+    .listap {
+      max-height: 0;
+      overflow: hidden; } }
+
+.elemp {
+  display: inline-block;
+  padding: 0;
+  margin: 0px;
+  color: white;
+  font-size: 1.5em; }
+  .elemp.activa .textp {
+    color: teal; }
+  @media screen and (max-width: 578px) {
+    .elemp {
+      display: block; } }
+
+.elems1 {
+  display: block;
+  width: 108px; }
+  @media screen and (max-width: 578px) {
+    .elems1 {
+      width: 100%; } }
+
+.elems2 {
+  display: block;
+  width: 196px; }
+  @media screen and (max-width: 578px) {
+    .elems2 {
+      width: 100%; } }
+
+input.texts {
+  background-color: rgba(105, 105, 105, 0.3);
+  width: 105px;
+  text-decoration: none;
+  text-align: center; }
+  input.texts:hover {
+    text-decoration: none; }
+
+.texts {
+  color: white;
+  display: block;
+  padding: 10px 0;
+  transition: text-decoration 500ms;
+  text-decoration: underline solid transparent; }
+  .texts:hover {
+    text-decoration: underline solid currentColor;
+    background-color: rgba(105, 105, 105, 0.3);
+    text-align: center; }
+
+.textp {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 10px 30px;
+  transition: background-color 500ms, text-shadow 500ms;
+  text-shadow: 0px -2em 2px darkgray;
+  overflow: hidden; }
+  .textp:hover {
+    text-shadow: 0px 0px 2px darkgray;
+    background-color: rgba(105, 105, 105, 0.3); }
+
+nav > input[type=checkbox] {
+  display: none; }
+
+nav > label {
+  display: none;
+  color: white;
+  user-select: none;
+  padding: 10px; }
+  @media screen and (max-width: 578px) {
+    nav > label {
+      display: block; } }
+
+.listas {
+  position: absolute;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 500ms;
+  background-color: black; }
+  @media screen and (max-width: 578px) {
+    .listas {
+      position: static; } }
+
+.elemp:hover .listas {
+  max-height: 200px; }
+
+@media screen and (max-width: 578px) {
+  nav > input[type=checkbox]:checked + ul {
+    max-height: 1000px; }
+    nav > input[type=checkbox]:checked + ul .textp {
+      transform: scaleX(1); }
+  .textp {
+    text-shadow: none;
+    transition: transform 500ms;
+    transform: scaleX(0); } }
+
+@media screen and (max-width: 768px) {
+  .hidden-tablet {
+    display: none; }
+  .elemp,
+  .elems {
+    font-size: 1em; } }

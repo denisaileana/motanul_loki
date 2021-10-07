@@ -1,0 +1,37 @@
+th,
+td {
+    border: 2px dashed pink;
+    padding: 5px;
+}
+
+td:nth-child(even),
+th:nth-child(even) {
+    background-color: lightblue;
+}
+
+td:nth-child(odd),
+th:nth-child(odd) {
+    background-color: palevioletred;
+}
+
+tr:hover td:not([rowspan]),
+tr:hover th {
+    background-color: chocolate;
+}
+
+td:empty {
+    padding: 20px;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    empty-cells: show;
+    font-family: 'Handlee', cursive;
+    white-space: nowrap;
+    width: 600px;
+}
+
+.table-container {
+    overflow: auto;
+}
